@@ -31,4 +31,6 @@ public class DatabaseInfo extends HttpServlet {
         response.setHeader("Access-Control-Max-Age", "86400");
 
     }
+
+
 }
