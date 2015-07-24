@@ -1,0 +1,21 @@
+
+TRUNCATE student;
+TRUNCATE professor;
+TRUNCATE course;
+TRUNCATE transcript;
+TRUNCATE teaching;
+LOAD DATA INFILE '/home/esc/Documents/proj4/data/student.txt' INTO TABLE student
+     FIELDS TERMINATED BY ',' 
+     LINES TERMINATED BY '\n';
+LOAD DATA INFILE '/home/esc/Documents/proj4/data/professor.txt' INTO TABLE professor
+     FIELDS TERMINATED BY ',' 
+     LINES TERMINATED BY '\n';
+LOAD DATA INFILE '/home/esc/Documents/proj4/data/course.txt' INTO TABLE course
+     FIELDS TERMINATED BY ',' 
+     LINES TERMINATED BY '\n';
+LOAD DATA INFILE '/home/esc/Documents/proj4/data/transcript.txt' INTO TABLE transcript
+     FIELDS TERMINATED BY ',' 
+     LINES TERMINATED BY '\n';
+LOAD DATA INFILE '/home/esc/Documents/proj4/data/teaching.txt' INTO TABLE teaching
+     FIELDS TERMINATED BY ',' 
+     LINES TERMINATED BY '\n';
