@@ -129,7 +129,7 @@ public class MySQLControl {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
-		String password = "hello";
+		String password = "hexapod";
 		connectionProps.put("password", password);
 
 		conn = DriverManager.getConnection(

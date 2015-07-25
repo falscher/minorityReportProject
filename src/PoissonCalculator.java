@@ -6,7 +6,7 @@ public class PoissonCalculator {
 		return lambda;
 	}
 	
-	public void calculateLambda(int avg){
+	public void calculateLambda(double avg){
 		lambda = Math.pow(Math.E, -avg) * (avg);
 	}
 	
@@ -20,6 +20,10 @@ public class PoissonCalculator {
 		control.connectServer();
 		control.execute("USE proj5;");
 		int num = control.selectCount("*", "crimes", "crime='murder'");
+		int total = control.selectCount(" DISTINCT (*)", "date", "");
+		
+		double avg=(double) num/total;
+		
 		System.out.println(num);
 		
 		PoissonCalculator calc = new PoissonCalculator();
