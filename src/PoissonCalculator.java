@@ -11,7 +11,9 @@ public class PoissonCalculator {
 	}
 	
 	public void calculateDistribution(){
-		
+	}
+	
+	public void calculateLambdaUseLocation(int x, int y){
 	}
 	
 	public static void main(String[] args) throws SQLException {
@@ -20,7 +22,7 @@ public class PoissonCalculator {
 		control.connectServer();
 		control.execute("USE proj5;");
 		int num = control.selectCount("*", "crimes", "crime='murder'");
-		int total = control.selectCount(" DISTINCT (*)", "date", "");
+		int total = control.selectCount(" DISTINCT (*)", "crimes", "");
 		
 		double avg=(double) num/total;
 		
