@@ -171,8 +171,11 @@ public class MySQLControl {
 		app.connectServer();
 		// app.execute("CREATE DATABASE proj5;");
 		app.execute("USE proj5;");
-		// app.execute("CREATE TABLE crimes(crime VARCHAR(20), x INT, y INT,
-		// calendarDate INT, time INT)");
+		app.execute("CREATE TABLE crimes(crime VARCHAR(20), x INT, y INT, calendarDate INT, time INT)");
+		app.execute("CREATE TABLE weather(x INT, y INT, calendarDate INT, time INT, temp INT)");
+		app.execute("CREATE TABLE geographic(x INT, y INT, description VARCHAR(20))");
+		app.execute("CREATE TABLE policemen(crime VARCHAR(20), x INT, y INT, calendarDate INT, time INT)");
+
 		// app.execute(
 		// "LOAD DATA INFILE '/home/esc/Documents/data.txt' INTO TABLE crimes
 		// TERMINATED BY ',' LINES TERMINATED BY '\n';");

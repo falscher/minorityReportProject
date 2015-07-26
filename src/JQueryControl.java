@@ -31,7 +31,7 @@ public class JQueryControl {
 		calc.calculateLambda(num);
 		return calc.getLambda();
 	}
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
