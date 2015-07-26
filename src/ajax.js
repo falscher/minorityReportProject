@@ -8,6 +8,7 @@ $(document).ready(function() {
 			url: "DatabaseInfo.java",
 			data: query,
 			dataType: "json",
+		    
 
 			success: function(data, textStatus, jqXHR) {
 				if (data.success) {
@@ -17,18 +18,20 @@ $(document).ready(function() {
 				}
 				else {
 					//append wrong
+
 					$('#ajaxResponse').html("");
 					$('#ajaxResponse').append("ERROR!!!!");
 				}
 			},
 
 			error: function (jqXHR, textStatus, errorThrown) {
+		    console.log(jqXHR+", "+ textStatus + ", " + errorThrown);
 				console.log("DANG! ERROR!" + textStatus);
 				//append to html
 			},
 
 			beforeSend: function (jqXHR) {
-				settings.data += "&dummyData=whatever";
+				//settings.data += "&dummyData=whatever";
 
 				$('#submit').attr("disabled", true);
 			},
