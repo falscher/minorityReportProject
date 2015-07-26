@@ -1,10 +1,12 @@
 import java.sql.SQLException;
 
 public class JQueryControl {
-	String row;
-	MySQLControl control = new MySQLControl();
+	private String crime;
+	private String row;
+	private MySQLControl control = new MySQLControl();
 
-	public JQueryControl() {
+	public JQueryControl(String crime) {
+		this.crime = crime;
 		callMySQLServer();
 	}
 
@@ -25,8 +27,8 @@ public class JQueryControl {
 		control.selectRow("*", "crimes", "");
 	}
 	
-	public double calculateProbability(String crime) throws SQLException{
-		int num = control.selectCount("*", "crimes", "crime='"+crime+"'");
+	public double calculateProbability() throws SQLException{
+		int num = control.selectCount("*", "crimes", "crime='"+this.crime+"'");
 		int total = control.selectCount(" DISTINCT (*)", "date", "");
 		
 		double avg=(double) num/total;

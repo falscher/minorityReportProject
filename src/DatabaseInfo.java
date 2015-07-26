@@ -5,6 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 
 /**
  * Created by Jiakuan on 7/23/15.
@@ -33,27 +37,33 @@ public class DatabaseInfo extends HttpServlet {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Access-Control-Max-Age", "86400");
 
+        Gson gson = new Gson();
         JsonObject controlObj = new JsonObject();
 
-        JsonElement control = getRate(crimeType);
+        JQueryControl myControl = getInfo(String crimeType);
+
+        JsonElement control = gson.toJsonTree(myControl);
+
 
         try {
             controlObj.addProperty("success", true);
         } catch (Exception e) {
             controlObj.addProperty("success", false);
         }
-        // TODO:
-        // controlObj.add("crime probability", );
+        
+        controlObj.add("crimeData", myControl);
         out.println(controlObj.toString());
         out.close();
     }
 
-    private double getRate(String crime) {
-        JQueryControl control = new JQueryControl();
+    //private Class getInfo()
 
-        double rate = control.calculateProbability(crime);
+    private JQueryControl getInfo(String crime) {
+        JQueryControl control = new JQueryControl(crime);
 
-        return rate;
+        //double rate = control.calculateProbability(crime);
+
+        return control;
     }
 
 

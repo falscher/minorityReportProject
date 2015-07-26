@@ -12,9 +12,13 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR) {
 				if (data.success) {
 					//append information
+					$('#ajaxResponse').html("");
+					$('#ajaxResponse').append("<br>"+data.crimeData.calculateProbability()+"<br>");
 				}
 				else {
 					//append wrong
+					$('#ajaxResponse').html("");
+					$('#ajaxResponse').append("ERROR!!!!");
 				}
 			},
 
