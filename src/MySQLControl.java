@@ -93,7 +93,7 @@ public class MySQLControl {
 				createString += " WHERE " + predicate;
 			}
 			createString += ";";
-			createString = "SELECT COUNT(*) FROM crimes WHERE crime='murder';";
+			//createString = "SELECT COUNT(*) FROM crimes WHERE crime='murder';";
 			ResultSet rs = stmt.executeQuery(createString);
 			System.out.println(createString);
 			//return 0;
@@ -103,7 +103,7 @@ public class MySQLControl {
 			}
 			return avg;
 		} catch (SQLException e) {
-			System.out.println("ERROR: Could not execute select");
+			System.out.println("ERROR: Could not execute select count");
 			e.printStackTrace();
 			return 0;
 		} finally {
@@ -165,14 +165,54 @@ public class MySQLControl {
 			return;
 		}
 	}
+	
+	public int executeCount(String command) throws SQLException{
+		Statement stmt = null;
+		try {
+			//command = "SELECT COUNT(*) FROM crimes WHERE crime='murder';";
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(command);
+			System.out.println(command);
+			//return 0;
+			int avg = 0;
+			while (rs.next()) { // common way to write JDBC
+				avg = rs.getInt(1);
+			}
+			return avg;
+		} catch (SQLException e) {
+			System.out.println("ERROR: Could not execute " + command);
+			e.printStackTrace();
+			return 0;
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+	
+	public void printLastRow(){
+		//get size of table
+		int index = rows.size();
+		
+		//get row at end of table
+		Comparable[] tuple = rows.get(index-1);
+		
+		//go through contents of tuple
+		for(int i=0; i<tuple.length; i++)
+			System.out.print(tuple[i] + ",");
+	}
 
 	public static void main(String[] args) throws SQLException {
 		MySQLControl app = new MySQLControl();
 		app.connectServer();
 		// app.execute("CREATE DATABASE proj5;");
 		app.execute("USE proj5;");
-		// app.execute("CREATE TABLE crimes(crime VARCHAR(20), x INT, y INT,
-		// calendarDate INT, time INT)");
+		/*
+		app.execute("CREATE TABLE crimes(crime VARCHAR(20), x INT, y INT, calendarDate INT, time INT)");
+		app.execute("CREATE TABLE weather(x INT, y INT, calendarDate INT, time INT, temp INT)");
+		app.execute("CREATE TABLE geographic(x INT, y INT, description VARCHAR(20))");
+		app.execute("CREATE TABLE policemen(crime VARCHAR(20), x INT, y INT, calendarDate INT, time INT)");
+*/
 		// app.execute(
 		// "LOAD DATA INFILE '/home/esc/Documents/data.txt' INTO TABLE crimes
 		// TERMINATED BY ',' LINES TERMINATED BY '\n';");
