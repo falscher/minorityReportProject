@@ -5,12 +5,9 @@ public class JQueryControl {
 	private String row;
 	private MySQLControl control = new MySQLControl();
 
-<<<<<<< HEAD
-	public JQueryControl(String crime) {
+
+	public JQueryControl(String crime) throws SQLException {
 		this.crime = crime;
-=======
-	public JQueryControl() throws SQLException {
->>>>>>> 448993e268f7218bb77211ae56df60de3c829359
 		callMySQLServer();
 	}
 
@@ -70,11 +67,6 @@ public class JQueryControl {
 			//go through time
 		return null;
 		
-	}
-	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
-		JQueryControl control = new JQueryControl();
-		control.calculateSchedule();
 	}
 
 }

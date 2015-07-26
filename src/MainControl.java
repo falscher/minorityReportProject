@@ -4,7 +4,7 @@ public class MainControl {
 
 	public static void main(String[] args) throws SQLException {
 		MySQLControl sql = new MySQLControl();
-		JQueryControl jqu = new JQueryControl();
+		JQueryControl jqu = new JQueryControl("murder");
 		PoissonCalculator poi = new PoissonCalculator();
 		
 		//setup connection to database

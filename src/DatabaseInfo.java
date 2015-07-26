@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -40,7 +41,13 @@ public class DatabaseInfo extends HttpServlet {
         Gson gson = new Gson();
         JsonObject controlObj = new JsonObject();
 
-        JQueryControl myControl = getInfo(String crimeType);
+        JQueryControl myControl = null;
+		try {
+			myControl = getInfo(crimeType);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         JsonElement control = gson.toJsonTree(myControl);
 
@@ -51,14 +58,14 @@ public class DatabaseInfo extends HttpServlet {
             controlObj.addProperty("success", false);
         }
         
-        controlObj.add("crimeData", myControl);
+        controlObj.add("crimeData", control);
         out.println(controlObj.toString());
         out.close();
     }
 
     //private Class getInfo()
 
-    private JQueryControl getInfo(String crime) {
+    private JQueryControl getInfo(String crime) throws SQLException {
         JQueryControl control = new JQueryControl(crime);
 
         //double rate = control.calculateProbability(crime);
