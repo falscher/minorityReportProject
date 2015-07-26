@@ -19,6 +19,9 @@ public class DatabaseInfo extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String crimeType = request.getParameter("crime");
+
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
         response.setHeader("Cache-control", "no-cache, no-store");
@@ -30,6 +33,27 @@ public class DatabaseInfo extends HttpServlet {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Access-Control-Max-Age", "86400");
 
+        JsonObject controlObj = new JsonObject();
+
+        JsonElement control = getRate(crimeType);
+
+        try {
+            controlObj.addProperty("success", true);
+        } catch (Exception e) {
+            controlObj.addProperty("success", false);
+        }
+        // TODO:
+        // controlObj.add("crime probability", );
+        out.println(controlObj.toString());
+        out.close();
+    }
+
+    private double getRate(String crime) {
+        JQueryControl control = new JQueryControl();
+
+        double rate = control.calculateProbability(crime);
+
+        return rate;
     }
 
 

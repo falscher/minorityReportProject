@@ -4,6 +4,10 @@ public class JQueryControl {
 	String row;
 	MySQLControl control = new MySQLControl();
 
+	public JQueryControl() {
+		callMySQLServer();
+	}
+
 	// get row to add
 	public String getRow() {
 		return row;
@@ -21,8 +25,8 @@ public class JQueryControl {
 		control.selectRow("*", "crimes", "");
 	}
 	
-	public double calculateProbability() throws SQLException{
-		int num = control.selectCount("*", "crimes", "crime='murder'");
+	public double calculateProbability(String crime) throws SQLException{
+		int num = control.selectCount("*", "crimes", "crime='"+crime+"'");
 		int total = control.selectCount(" DISTINCT (*)", "date", "");
 		
 		double avg=(double) num/total;
